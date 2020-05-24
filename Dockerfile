@@ -10,4 +10,5 @@ EXPOSE 8080
 #USER coder
 #WORKDIR /home/coder
 #ENTRYPOINT ["dumb-init" "fixuid" "-q" "/usr/bin/code-server" "--bind-addr" "0.0.0.0:8080" "."]
-ENTRYPOINT ["code-server" "--bind-addr" "0.0.0.0:8080" "."]
+ENTRYPOINT ["/bin/bash"]
+CMD ["code-server" "--bind-addr" "0.0.0.0:8080" "."]
