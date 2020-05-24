@@ -6,4 +6,5 @@ RUN curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-
     yum clean all; \
     rm -rf /var/cache/yum
 
-CMD /usr/bin/code-server
+#CMD /usr/bin/code-server
+CMD code-server
