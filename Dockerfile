@@ -27,7 +27,7 @@ RUN chmod +x /bin/dumb-init; \
 	groupadd -r -g 1001 user; \
 	useradd -m -r -g 1001 -u 1001 user; \
 	usermod -G root,user,wheel user ;\
-    pip3 install azure-cli ;\
+    pip3 install azure-cli
 
 USER 1001
 RUN code-server --install-extension bierner.markdown-preview-github-styles; \
