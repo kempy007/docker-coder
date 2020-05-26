@@ -27,8 +27,10 @@ RUN chmod +x /bin/dumb-init; \
 	groupmod -g 91 video; \
 	groupadd -r -g 1001 user; \
 	useradd -m -r -g 1001 -u 1001 user; \
-	usermod -G root,user,wheel user; \
-    code-server --install-extension bierner.markdown-preview-github-styles; \
+	usermod -G root,user,wheel user
+
+USER 1001
+RUN code-server --install-extension bierner.markdown-preview-github-styles; \
     code-server --install-extension DavidAnson.vscode-markdownlint; \
     code-server --install-extension hediet.vscode-drawio; \
     code-server --install-extension marlon407.code-groovy; \
@@ -42,7 +44,5 @@ RUN chmod +x /bin/dumb-init; \
 WORKDIR /coder
 
 EXPOSE 8080 2345
-
-USER 1001
 
 CMD [ "/bin/bash", "runcontainer.sh" ]
