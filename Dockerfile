@@ -26,11 +26,11 @@ RUN chmod +x /bin/dumb-init; \
 	groupmod -g 91 video; \
 	groupadd -r -g 1001 user; \
 	useradd -m -r -g 1001 -u 1001 user; \
-	usermod -G root,user,wheel user
+	usermod -G root,user,wheel user ;\
+    pip3 install azure-cli ;\
 
 USER 1001
-RUN pip3 install azure-cli ;\
-    code-server --install-extension bierner.markdown-preview-github-styles; \
+RUN code-server --install-extension bierner.markdown-preview-github-styles; \
     code-server --install-extension DavidAnson.vscode-markdownlint; \
     code-server --install-extension hediet.vscode-drawio; \
     code-server --install-extension marlon407.code-groovy; \
