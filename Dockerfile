@@ -11,7 +11,7 @@ RUN chmod +x /bin/dumb-init; \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl ;\
     chmod +x ./kubectl ;\
     mv ./kubectl /usr/local/bin/kubectl ;\
-    yum config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional ;\
+    yum config-manager --set-enabled PowerTools ;\
     yum install lynx ;\
     yum clean all; \
     rm -rf /var/cache/yum; \
