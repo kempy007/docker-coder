@@ -1,0 +1,5 @@
+commandTests:
+  - name: "version check"
+    command: "code-server"
+    args: ["-v"]
+    expectedOutput: ["3.3.1", "6f1309795e1cb930edba68cdc7c3dcaa01da0ab3"]
