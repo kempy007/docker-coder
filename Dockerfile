@@ -1,7 +1,6 @@
 FROM registry.access.redhat.com/ubi8/ubi:8.2
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 /bin/dumb-init
-ADD runcontainer.sh /
 
 RUN chmod 777 /bin/dumb-init; \
     curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-amd64.rpm; \
@@ -17,6 +16,8 @@ RUN chmod 777 /bin/dumb-init; \
     chmod -R g+rwX /home/user; \
     chmod 777 /runcontainer.sh; \
 	chmod g+w /etc/passwd
+
+ADD runcontainer.sh /coder/runcontainer.sh
 
 WORKDIR /coder
 
