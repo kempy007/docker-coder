@@ -14,7 +14,7 @@ RUN chmod 777 /bin/dumb-init; \
     mkdir /home/user; \
     chgrp -R 0 /home/user; \
     chmod -R g+rwX /home/user; \
-    chmod 777 /runcontainer.sh; \
+    chmod 777 /coder/runcontainer.sh; \
 	chmod g+w /etc/passwd
 
 ADD runcontainer.sh /coder/runcontainer.sh
