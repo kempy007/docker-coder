@@ -11,7 +11,7 @@ RUN chmod +x /bin/dumb-init; \
     chmod +x ./kubectl ;\
     mv ./kubectl /usr/local/bin/kubectl ;\
     curl -LO https://invisible-mirror.net/archives/lynx/tarballs/lynx2.8.9rel.1.tar.gz && tar -zxvf lynx2.8.9rel.1.tar.gz && rm -f lynx2.8.9rel.1.tar.gz ;\
-    cd /lynx2.8.9rel.1 && ./configure && make && make install && rm -rf /lynx2.8.9rel.1 ;\
+    cd /lynx2.8.9rel.1 && ./configure && make && make install && rm -rf /lynx2.8.9rel.1 && cd / ;\
     yum clean all; \
     rm -rf /var/cache/yum; \
     mkdir /coder; \
