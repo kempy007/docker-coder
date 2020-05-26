@@ -5,8 +5,14 @@ ADD runcontainer.sh /coder/runcontainer.sh
 
 RUN chmod +x /bin/dumb-init; \
     curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-amd64.rpm; \
-    yum install -y code-server-3.3.1-amd64.rpm golang delve bash; \
+    yum install -y code-server-3.3.1-amd64.rpm golang delve bash git python36 java-11-openjdk nodejs; \
     rm -f code-server-3.3.1-amd64.rpm; \
+    curl -L https://aka.ms/InstallAzureCli | bash ;\
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl ;\
+    chmod +x ./kubectl ;\
+    mv ./kubectl /usr/local/bin/kubectl ;\
+    yum config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional ;\
+    yum install lynx ;\
     yum clean all; \
     rm -rf /var/cache/yum; \
     mkdir /coder; \
@@ -21,16 +27,21 @@ RUN chmod +x /bin/dumb-init; \
 	groupmod -g 91 video; \
 	groupadd -r -g 1001 user; \
 	useradd -m -r -g 1001 -u 1001 user; \
-	usermod -G root,user,wheel user
+	usermod -G root,user,wheel user; \
+    code-server --install-extension bierner.markdown-preview-github-styles; \
+    code-server --install-extension DavidAnson.vscode-markdownlint; \
+    code-server --install-extension hediet.vscode-drawio; \
+    code-server --install-extension marlon407.code-groovy; \
+    code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools; \
+    code-server --install-extension ms-vscode.Go; \
+    code-server --install-extension redhat.java; \
+    code-server --install-extension redhat.vscode-yaml; \
+    code-server --install-extension SonarSource.sonarlint-vscode; \
+    code-server --install-extension streetsidesoftware.code-spell-checker
 
 WORKDIR /coder
 
 EXPOSE 8080 2345
-#USER coder
-#WORKDIR /home/coder
-#ENTRYPOINT ["dumb-init" "fixuid" "-q" "/usr/bin/code-server" "--bind-addr" "0.0.0.0:8080" "."]
-#ENTRYPOINT ["/bin/sh", "-c", "/bin/bash"]
-#CMD ["dumb-init", "code-server" "--bind-addr" "0.0.0.0:8080" "."]
 
 USER 1001
 
