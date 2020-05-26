@@ -11,7 +11,7 @@ RUN chmod +x /bin/dumb-init; \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl ;\
     chmod +x ./kubectl ;\
     mv ./kubectl /usr/local/bin/kubectl ;\
-    yum config-manager --set-enabled PowerTools ;\
+    subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms ;\
     yum install lynx ;\
     yum clean all; \
     rm -rf /var/cache/yum; \
