@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/ubi:8.2
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 /bin/dumb-init
 ADD runcontainer.sh /coder/runcontainer.sh
 
-RUN chmod 777 /bin/dumb-init; \
+RUN chmod +x /bin/dumb-init; \
     curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-amd64.rpm; \
     yum install -y code-server-3.3.1-amd64.rpm golang delve bash; \
     rm -f code-server-3.3.1-amd64.rpm; \
@@ -16,7 +16,12 @@ RUN chmod 777 /bin/dumb-init; \
     chgrp -R 0 /home/user; \
     chmod -R g+rwX /home/user; \
     chmod 777 /coder/runcontainer.sh; \
-	chmod g+w /etc/passwd
+	chmod g+w /etc/passwd; \
+    groupmod -g 92 audio; \
+	groupmod -g 91 video; \
+	groupadd -r -g 1001 user; \
+	useradd -m -r -g 1001 -u 1001 user; \
+	usermod -G root,user,wheel user
 
 WORKDIR /coder
 
