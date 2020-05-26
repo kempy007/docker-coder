@@ -10,4 +10,4 @@ if [ $DUID -ge 10000 ]; then
 	rm /tmp/passwd
 fi
 
-dumb-init code-server --bind-addr 0.0.0.0:8080 .
+dumb-init code-server --disable-telemetry --bind-addr 0.0.0.0:8080 .
