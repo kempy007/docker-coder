@@ -7,7 +7,6 @@ RUN chmod +x /bin/dumb-init; \
     curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-amd64.rpm; \
     yum install -y code-server-3.3.1-amd64.rpm golang delve bash git python36 java-11-openjdk nodejs make gcc libffi-devel python36-devel openssl-devel ncurses ncurses-devel ; \
     rm -f code-server-3.3.1-amd64.rpm; \
-    curl -L https://aka.ms/InstallAzureCli | bash ;\
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl ;\
     chmod +x ./kubectl ;\
     mv ./kubectl /usr/local/bin/kubectl ;\
@@ -30,7 +29,8 @@ RUN chmod +x /bin/dumb-init; \
 	usermod -G root,user,wheel user
 
 USER 1001
-RUN code-server --install-extension bierner.markdown-preview-github-styles; \
+RUN pip3 install azure-cli ;\
+    code-server --install-extension bierner.markdown-preview-github-styles; \
     code-server --install-extension DavidAnson.vscode-markdownlint; \
     code-server --install-extension hediet.vscode-drawio; \
     code-server --install-extension marlon407.code-groovy; \
