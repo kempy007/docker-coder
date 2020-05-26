@@ -5,14 +5,13 @@ ADD runcontainer.sh /coder/runcontainer.sh
 
 RUN chmod +x /bin/dumb-init; \
     curl -sSOL https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-amd64.rpm; \
-    yum install -y code-server-3.3.1-amd64.rpm golang delve bash git python36 java-11-openjdk nodejs; \
+    yum install -y code-server-3.3.1-amd64.rpm golang delve bash git python36 java-11-openjdk nodejs make gcc libffi-devel python36u-devel openssl-devel; \
     rm -f code-server-3.3.1-amd64.rpm; \
     curl -L https://aka.ms/InstallAzureCli | bash ;\
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl ;\
     chmod +x ./kubectl ;\
     mv ./kubectl /usr/local/bin/kubectl ;\
-    subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms ;\
-    yum install lynx ;\
+    curl -LO https://invisible-mirror.net/archives/lynx/tarballs/lynx2.8.9rel.1.tar.gz && tar -zxvf lynx2.8.9rel.1.tar.gz && rm -f lynx2.8.9rel.1.tar.gz ;\
     yum clean all; \
     rm -rf /var/cache/yum; \
     mkdir /coder; \
